@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/v1x1e/hrsf84-thesis/issues"
   },
-  "homepage": "https://github.com/v1x1e/hrsf84-thesis#readme"
+  "homepage": "https://github.com/v1x1e/hrsf84-thesis#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "sequelize": "^4.28.5"
+  }
 }
