@@ -1,6 +1,6 @@
-# Project Name
+# Thesis
 
-The project description
+Amazon Users service
 
 ## Roadmap
 
@@ -13,10 +13,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 # Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+2. [Requirements](#requirements)
+3. [Development](#development)
+    - [Installing Dependencies](#installing-dependencies)
+    - [Tasks](#tasks)
 
 ## Usage
 
@@ -24,12 +24,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Requirements
 
-- Node 6.9.x
-- Redis 3.2.x
-- Postgresql 9.6.x
-- etc
+- Node 7.8.0
+- Express 4.16.2
+- PostgreSQL 10.1.0
+- Sequelize 4.28.5
 
 ## Other Information
 
-(TODO: fill this out with details about your project. Suggested ideas: architecture diagram, schema, and any other details from your app plan that sound interesting.)
-
+- TODO
