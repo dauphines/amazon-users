@@ -19,5 +19,8 @@
   "dependencies": {
     "express": "^4.16.2",
     "sequelize": "^4.28.5"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
   }
 }
