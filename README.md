@@ -28,6 +28,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 - Express 4.16.2
 - PostgreSQL 10.1.0
 - Sequelize 4.28.5
+- Faker.js 4.1.0
 
 ## Other Information
 
