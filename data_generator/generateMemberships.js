@@ -62,14 +62,16 @@ stream.once('open', (fd) => {
     let trial_signup_date = faker.date.between('01/01/17', '12/31/17');
     let trial_end_date = getTrialEndDate(trial_signup_date);
     let prime_canel_date = randomizeCancelTrial(trial_signup_date, trial_end_date);
+    let prime_retained = true;
 
     if (prime_canel_date !== '') {
+      prime_retained = false;
       prime_canel_date = removeTimeZone(prime_canel_date);
     }
 
     trial_signup_date = removeTimeZone(trial_signup_date);
 
-    stream.write(`${id},${id},${prime_status},${total_spend_trial_signup},${trial_signup_date},${trial_end_date},${prime_canel_date}\n`);
+    stream.write(`${id},${id},${prime_status},${total_spend_trial_signup},${trial_signup_date},${trial_end_date},${prime_canel_date},${prime_retained}\n`);
     logDataGeneration(id);
   }
 
