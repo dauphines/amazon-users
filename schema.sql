@@ -26,9 +26,10 @@ CREATE TABLE primeMemberships (
   user_id INTEGER,
   prime_status VARCHAR(6),
   total_spend_trial_signup INTEGER,
-  trial_signup_date TIMESTAMP WITH TIME ZONE,
+  trial_signup_date TIMESTAMP,
   trial_end_date TIMESTAMP,
-  prime_canel_date TIMESTAMP WITH TIME ZONE
+  prime_canel_date TIMESTAMP,
+  prime_retained BOOLEAN NOT NULL
 );
 
 CREATE TABLE primeRetentionAnalysis (
