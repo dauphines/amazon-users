@@ -17,21 +17,23 @@ const getTrialEndDate = (signupDate) => {
   let endMonth = '';
   let endDay = totalDays - calendar[startMonth];
 
-  if (startMonth === 1 && startDay > 29) {
-    totalDays = totalDays - startDay - 28;
-    return `3/${totalDays}/17`;
-  } else {
-    if (startMonth === 12 && startDay > 1) {
-      return `1/${endDay}/18`;
-    } else if (endDay === 0) {
-      if (startMonth === 12) {
-        return '1/1/18';
-      } else {
-        return `${startMonth + 1}/1/17`;
-      }
+  if (endDay === 0) {
+    if (startMonth === 12) {
+      return '1/1/18';
     }
-    return `${startMonth + 1}/${endDay}/17`;
+    return `${startMonth + 1}/1/17`;
   }
+
+  if (startMonth === 1 && startDay > 29) {
+    endDay = totalDays - startDay - 28;
+    return `3/${endDay}/17`;
+  }
+
+  if (startMonth === 12 && startDay > 1) {
+    return `1/${endDay}/18`;
+  }
+
+  return `${startMonth + 1}/${endDay}/17`;
 };
 
 const randomizeCancelTrial = (signupDate, endDate) => {
