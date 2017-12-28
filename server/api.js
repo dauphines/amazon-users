@@ -18,29 +18,17 @@ app.get('/', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  let user = {
-    first_name: 'Boo',
-    last_name: 'Face',
-    email: 'test@test.com',
-    contact_number: 19098765432
-  };
-
-  db.registerAccount(user);
-  // writes to database with hardcoded user object
-  // req.body is empty object in postman, should be params object
-
-  res.send('User registered account!');
+  db.registerAccount(req.body);
+  res.send('User registered!');
 });
 
 app.put('/prime/signup', (req, res) => {
-  let user = inputs.test_user_005_signup; // req.body.user
-  db.updateUserTrialSignup(user);
+  db.updateUserTrialSignup(req.body);
   res.send('User signed up!');
 });
 
 app.put('/prime/cancel', (req, res) => {
-  let user = inputs.test_user_005_cancel; // req.body.user
-  db.updateUserTrialCancel(user);
+  db.updateUserTrialCancel(req.body);
   res.send('User cancelled!');
 });
 
