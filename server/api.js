@@ -14,12 +14,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
-  res.send('Aloha Universe!');
+  res.send('Aloha universe!');
 });
 
 app.post('/register', (req, res) => {
   db.registerAccount(req.body);
-  res.send('User registered!');
+  res.send('Account registered!');
 });
 
 app.put('/prime/signup', (req, res) => {
