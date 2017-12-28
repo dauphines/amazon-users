@@ -142,7 +142,7 @@ const registerAccount = (userObject, callback) => {
     contact_number: number
   })
     .then(data => {
-      console.log('\x1b[32m----- SUCCESS : USER REGISTERED -----\x1b[0m');
+      console.log('\x1b[32m----- SUCCESS : ROW CREATED -----\x1b[0m');
     })
     .catch(err => {
       console.log('\x1b[31m----- ERROR : registerAccount -----\x1b[0m');
@@ -160,25 +160,28 @@ const updateTrialSignup = (userObject, callback) => {
   let signup_date = userObject.trial_signup_date;
   let end_date = getTrialEndDate(signup_date) || '';
 
-  PrimeMemberships.update(
-    {
-      total_spend_trial_signup: total_spend,
-      trial_signup_date: signup_date,
-      prime_status: 'trial'
-    },
-    {
-      where: { id: user_id }
-    })
+  PrimeMemberships.create({
+    user_id: user_id,
+    prime_status: 'trial',
+    total_spend_trial_signup: total_spend,
+    trial_signup_date: signup_date,
+    trial_end_date: end_date
+  })
     .then(data => {
-      PrimeMemberships.update(
-        {
-          trial_end_date: end_date
-        },
-        {
-          where: { id: user_id }
-        });
+      console.log('\x1b[32m----- SUCCESS : ROW CREATED -----\x1b[0m');
+    })
+    .catch(err => {
+      console.log('\x1b[31m----- ERROR : updateTrialSignup -----\x1b[0m');
+      console.log(err);
+    });
 
-      console.log(`\x1b[32m----- SUCCESS : USER ${user_id} SIGNED UP -----\x1b[0m`);
+  PrimeRetentionAnalysis.create({
+    user_id: user_id,
+    total_spend_trial_signup: total_spend,
+    trial_end_date: end_date
+  })
+    .then(data => {
+      console.log('\x1b[32m----- SUCCESS : ROW CREATED -----\x1b[0m');
     })
     .catch(err => {
       console.log('\x1b[31m----- ERROR : updateTrialSignup -----\x1b[0m');
@@ -202,10 +205,32 @@ const updateTrialCancel = (userObject, callback) => {
     { where: { id: user_id }
     })
     .then(data => {
-      console.log(`\x1b[32m----- SUCCESS : USER ${user_id} CANCELLED -----\x1b[0m`);
+      console.log('\x1b[32m----- SUCCESS : ROW UPDATED -----\x1b[0m');
     })
     .catch(err => {
       console.log('\x1b[31m----- ERROR : updateTrialCancel -----\x1b[0m');
+      console.log(err);
+    });
+};
+
+
+/* -------------------- UPDATE PRIME STATUS -------------------- */
+
+
+const updatePrimeStatus = (userObject, callback) => {
+  let user_id = userObject.user_id;
+
+  PrimeMemberships.update(
+    {
+      prime_status: null
+    },
+    { where: { id: user_id }
+    })
+    .then(data => {
+      console.log('\x1b[32m----- SUCCESS : ROW UPDATED -----\x1b[0m');
+    })
+    .catch(err => {
+      console.log('\x1b[31m----- ERROR : updatePrimeStatus -----\x1b[0m');
       console.log(err);
     });
 };
@@ -217,5 +242,6 @@ const updateTrialCancel = (userObject, callback) => {
 module.exports = {
   registerAccount: registerAccount,
   updateTrialSignup: updateTrialSignup,
-  updateTrialCancel: updateTrialCancel
+  updateTrialCancel: updateTrialCancel,
+  updatePrimeStatus: updatePrimeStatus
 };
