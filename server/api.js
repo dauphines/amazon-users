@@ -18,12 +18,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  db.registerAccount(req.body);
+  db.addAccount(req.body);
   res.send('Account registered!');
 });
 
 app.put('/prime/signup', (req, res) => {
-  db.updateTrialSignup(req.body);
+  db.addTrialSignup(req.body);
   res.send('User signed up!');
 });
 
