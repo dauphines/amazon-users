@@ -141,12 +141,11 @@ const registerAccount = (userObject, callback) => {
     email: email,
     contact_number: number
   })
-    .then(
-      // console.log('\x1b[32m----- SUCCESS : USER REGISTERED -----\x1b[0m');
-    )
+    .then(data => {
+      console.log('\x1b[32m----- SUCCESS : USER REGISTERED -----\x1b[0m');
+    })
     .catch(err => {
-      // console.log('\x1b[31m----- ERROR : registerAccount -----\x1b[0m');
-      // console.log(err);
+      console.log('\x1b[31m----- ERROR : registerAccount -----\x1b[0m');
       console.log(err);
     });
 };
@@ -179,7 +178,7 @@ const updateUserTrialSignup = (userObject, callback) => {
           where: { id: user_id }
         });
 
-      res.send(`\x1b[32m----- SUCCESS : USER ${user_id} SIGNED UP -----\x1b[0m`);
+      console.log(`\x1b[32m----- SUCCESS : USER ${user_id} SIGNED UP -----\x1b[0m`);
     })
     .catch(err => {
       console.log('\x1b[31m----- ERROR : updateUserTrialSignup -----\x1b[0m');
@@ -203,7 +202,7 @@ const updateUserTrialCancel = (userObject, callback) => {
     { where: { id: user_id }
     })
     .then(data => {
-      res.send(`\x1b[32m----- SUCCESS : USER ${user_id} CANCELLED -----\x1b[0m`);
+      console.log(`\x1b[32m----- SUCCESS : USER ${user_id} CANCELLED -----\x1b[0m`);
     })
     .catch(err => {
       console.log('\x1b[31m----- ERROR : updateUserTrialCancel -----\x1b[0m');
