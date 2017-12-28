@@ -5,7 +5,8 @@ const sequelize = new Sequelize({
   database: 'test',
   dialect: 'postgres',
   username: 'abscura',
-  password: null
+  password: null,
+  operatorsAliases: Sequelize.Op,
 });
 
 sequelize
@@ -14,7 +15,8 @@ sequelize
     console.log('\x1b[32m----- SUCCESSFUL DATABASE CONNECTION -----\x1b[0m');
   })
   .catch(err => {
-    console.error('\x1b[31m----- FAILED DATABASE CONNECTION : ', err, ' -----\x1b[0m');
+    console.error('\x1b[31m----- FAILED DATABASE CONNECTION -----\x1b[0m');
+    console.error(err);
   });
 
 
@@ -114,6 +116,41 @@ PrimeRetentionAnalysis.sync();
 //     console.log('\x1b[31m----- BULKCREATE ERROR : ', err, ' -----\x1b[0m');
 //   });
 
+// Users
+//   .upsert({
+//     first_name: 'Vi',
+//     last_name: 'Xi',
+//     email: 'test@test.com',
+//     contact_number: 18089876543
+//   })
+//   .then()
+//   .catch(err => console.log(err));
+
+/* -------------------- REGISTER NEW USER -------------------- */
+
+
+const registerAccount = (userObject, callback) => {
+  let first_name = userObject.first_name;
+  let last_name = userObject.last_name;
+  let email = userObject.email;
+  let number = userObject.contact_number;
+
+  Users.create({
+    first_name: first_name,
+    last_name: last_name,
+    email: email,
+    contact_number: number
+  })
+    .then(
+      // console.log('\x1b[32m----- SUCCESS : USER REGISTERED -----\x1b[0m');
+    )
+    .catch(err => {
+      // console.log('\x1b[31m----- ERROR : registerAccount -----\x1b[0m');
+      // console.log(err);
+      console.log(err);
+    });
+};
+
 
 /* -------------------- UPDATE USER TRIAL SIGNUP -------------------- */
 
@@ -122,27 +159,31 @@ const updateUserTrialSignup = (userObject, callback) => {
   let user_id = userObject.user_id;
   let total_spend = userObject.total_spend_trial_signup;
   let signup_date = userObject.trial_signup_date;
-  let end_date = getTrialEndDate(signup_date);
+  let end_date = getTrialEndDate(signup_date) || '';
 
   PrimeMemberships.update(
     {
       total_spend_trial_signup: total_spend,
-      trial_signup_date: signup_date
+      trial_signup_date: signup_date,
+      prime_status: 'trial'
     },
     {
       where: { id: user_id }
     })
-    .then(
+    .then(data => {
       PrimeMemberships.update(
         {
           trial_end_date: end_date
         },
         {
           where: { id: user_id }
-        })
-    )
+        });
+
+      res.send(`\x1b[32m----- SUCCESS : USER ${user_id} SIGNED UP -----\x1b[0m`);
+    })
     .catch(err => {
-      console.log('\x1b[31m----- FINDBYID ERROR : ', err, ' -----\x1b[0m');
+      console.log('\x1b[31m----- ERROR : updateUserTrialSignup -----\x1b[0m');
+      console.log(err);
     });
 };
 
@@ -156,13 +197,17 @@ const updateUserTrialCancel = (userObject, callback) => {
 
   PrimeMemberships.update(
     {
-      prime_cancel_date: cancel_date
+      prime_cancel_date: cancel_date,
+      prime_status: null
     },
     { where: { id: user_id }
     })
-    .then()
+    .then(data => {
+      res.send(`\x1b[32m----- SUCCESS : USER ${user_id} CANCELLED -----\x1b[0m`);
+    })
     .catch(err => {
-      console.log('\x1b[31m----- FINDBYID ERROR : ', err, ' -----\x1b[0m');
+      console.log('\x1b[31m----- ERROR : updateUserTrialCancel -----\x1b[0m');
+      console.log(err);
     });
 };
 
@@ -171,6 +216,7 @@ const updateUserTrialCancel = (userObject, callback) => {
 
 
 module.exports = {
+  registerAccount: registerAccount,
   updateUserTrialSignup: updateUserTrialSignup,
   updateUserTrialCancel: updateUserTrialCancel
 };
