@@ -23,12 +23,12 @@ app.post('/register', (req, res) => {
 });
 
 app.put('/prime/signup', (req, res) => {
-  db.updateUserTrialSignup(req.body);
+  db.updateTrialSignup(req.body);
   res.send('User signed up!');
 });
 
 app.put('/prime/cancel', (req, res) => {
-  db.updateUserTrialCancel(req.body);
+  db.updateTrialCancel(req.body);
   res.send('User cancelled!');
 });
 

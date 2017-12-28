@@ -154,7 +154,7 @@ const registerAccount = (userObject, callback) => {
 /* -------------------- UPDATE USER TRIAL SIGNUP -------------------- */
 
 
-const updateUserTrialSignup = (userObject, callback) => {
+const updateTrialSignup = (userObject, callback) => {
   let user_id = userObject.user_id;
   let total_spend = userObject.total_spend_trial_signup;
   let signup_date = userObject.trial_signup_date;
@@ -181,7 +181,7 @@ const updateUserTrialSignup = (userObject, callback) => {
       console.log(`\x1b[32m----- SUCCESS : USER ${user_id} SIGNED UP -----\x1b[0m`);
     })
     .catch(err => {
-      console.log('\x1b[31m----- ERROR : updateUserTrialSignup -----\x1b[0m');
+      console.log('\x1b[31m----- ERROR : updateTrialSignup -----\x1b[0m');
       console.log(err);
     });
 };
@@ -190,7 +190,7 @@ const updateUserTrialSignup = (userObject, callback) => {
 /* -------------------- UPDATE USER TRIAL CANCEL -------------------- */
 
 
-const updateUserTrialCancel = (userObject, callback) => {
+const updateTrialCancel = (userObject, callback) => {
   let user_id = userObject.user_id;
   let cancel_date = userObject.prime_cancel_date;
 
@@ -205,7 +205,7 @@ const updateUserTrialCancel = (userObject, callback) => {
       console.log(`\x1b[32m----- SUCCESS : USER ${user_id} CANCELLED -----\x1b[0m`);
     })
     .catch(err => {
-      console.log('\x1b[31m----- ERROR : updateUserTrialCancel -----\x1b[0m');
+      console.log('\x1b[31m----- ERROR : updateTrialCancel -----\x1b[0m');
       console.log(err);
     });
 };
@@ -216,6 +216,6 @@ const updateUserTrialCancel = (userObject, callback) => {
 
 module.exports = {
   registerAccount: registerAccount,
-  updateUserTrialSignup: updateUserTrialSignup,
-  updateUserTrialCancel: updateUserTrialCancel
+  updateTrialSignup: updateTrialSignup,
+  updateTrialCancel: updateTrialCancel
 };
