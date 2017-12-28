@@ -3,7 +3,7 @@ config/development.json
 config/production.json
 config/staging.json
 config/test.json
-data_generator/data/
+generator/data/
 
 # OSX
 .DS_Store
