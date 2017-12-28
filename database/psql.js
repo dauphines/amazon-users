@@ -129,7 +129,7 @@ PrimeRetentionAnalysis.sync();
 /* -------------------- REGISTER NEW USER -------------------- */
 
 
-const registerAccount = (userObject, callback) => {
+const addAccount = (userObject, callback) => {
   let first_name = userObject.first_name;
   let last_name = userObject.last_name;
   let email = userObject.email;
@@ -145,7 +145,7 @@ const registerAccount = (userObject, callback) => {
       console.log('\x1b[32m----- SUCCESS : ROW CREATED -----\x1b[0m');
     })
     .catch(err => {
-      console.log('\x1b[31m----- ERROR : registerAccount -----\x1b[0m');
+      console.log('\x1b[31m----- ERROR : addAccount -----\x1b[0m');
       console.log(err);
     });
 };
@@ -154,7 +154,7 @@ const registerAccount = (userObject, callback) => {
 /* -------------------- UPDATE USER TRIAL SIGNUP -------------------- */
 
 
-const updateTrialSignup = (userObject, callback) => {
+const addTrialSignup = (userObject, callback) => {
   let user_id = userObject.user_id;
   let total_spend = userObject.total_spend_trial_signup;
   let signup_date = userObject.trial_signup_date;
@@ -171,7 +171,7 @@ const updateTrialSignup = (userObject, callback) => {
       console.log('\x1b[32m----- SUCCESS : ROW CREATED -----\x1b[0m');
     })
     .catch(err => {
-      console.log('\x1b[31m----- ERROR : updateTrialSignup -----\x1b[0m');
+      console.log('\x1b[31m----- ERROR : addTrialSignup -----\x1b[0m');
       console.log(err);
     });
 
@@ -184,7 +184,7 @@ const updateTrialSignup = (userObject, callback) => {
       console.log('\x1b[32m----- SUCCESS : ROW CREATED -----\x1b[0m');
     })
     .catch(err => {
-      console.log('\x1b[31m----- ERROR : updateTrialSignup -----\x1b[0m');
+      console.log('\x1b[31m----- ERROR : addTrialSignup -----\x1b[0m');
       console.log(err);
     });
 };
@@ -240,8 +240,8 @@ const updatePrimeStatus = (userObject, callback) => {
 
 
 module.exports = {
-  registerAccount: registerAccount,
-  updateTrialSignup: updateTrialSignup,
+  addAccount: addAccount,
+  addTrialSignup: addTrialSignup,
   updateTrialCancel: updateTrialCancel,
   updatePrimeStatus: updatePrimeStatus
 };
